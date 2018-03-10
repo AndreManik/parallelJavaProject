@@ -34,9 +34,12 @@ public class MealUtils {
                                                                      Collectors.summingInt(meal -> meal.getCalories())));
 
         List<MealWithExceed> mealWithExceedList = mealList.stream().filter(meal -> TimeUtil.isBetween(meal.getTime(), startTime, endTime))
-                .map(meal -> new MealWithExceed(meal.getDateTime(), meal.getDescription(), meal.getCalories(),
-                        caloriesSumPerDay.get(meal.getDateTime().toLocalDate()) > caloriesPerDay))
+                .map(meal -> createWithExceed(meal,caloriesSumPerDay.get(meal.getDateTime().toLocalDate()) > caloriesPerDay))
                 .collect(Collectors.toList());
         return mealWithExceedList;
+    }
+
+    private static MealWithExceed createWithExceed(Meal meal, boolean exceeded) {
+        return new MealWithExceed(meal.getDateTime(), meal.getDescription(), meal.getCalories(), exceeded);
     }
 }
