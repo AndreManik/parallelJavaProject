@@ -6,6 +6,8 @@
 
     <groupId>parallel</groupId>
     <artifactId>parallelJavaProject</artifactId>
+    <packaging>jar</packaging>
+
     <version>1.0-SNAPSHOT</version>
 
     <name>My parallel project</name>
