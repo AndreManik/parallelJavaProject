@@ -3,11 +3,14 @@ package ru.parallelProject.parallel.util;
 import ru.parallelProject.parallel.model.Meal;
 import ru.parallelProject.parallel.model.MealWithExceed;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.Month;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class MealUtils {
 
@@ -21,11 +24,19 @@ public class MealUtils {
                 new Meal(LocalDateTime.of(2015, Month.MAY, 31,20,20), "Ужин", 510)
         );
 
-        getFilteredMealWithExceeded(mealList, LocalTime.of(7,0), LocalTime.of(12,0), 2000);
+        List<MealWithExceed> filteredMealWithExceeded = getFilteredMealWithExceeded(mealList, LocalTime.of(7, 0), LocalTime.of(12, 0), 2000);
+        filteredMealWithExceeded.forEach(meal -> System.out.println(meal));
     }
 
     private static List<MealWithExceed> getFilteredMealWithExceeded(List<Meal> mealList, LocalTime startTime, LocalTime endTime, int caloriesPerDay) {
-        System.out.println("new Branch");
-        return null;
+
+        Map<LocalDate, Integer> caloriesSumPerDay = mealList.stream().collect(Collectors.groupingBy(meal -> meal.getDateTime().toLocalDate(),
+                                                                     Collectors.summingInt(meal -> meal.getCalories())));
+
+        List<MealWithExceed> mealWithExceedList = mealList.stream().filter(meal -> TimeUtil.isBetween(meal.getDateTime().toLocalTime(), startTime, endTime))
+                .map(meal -> new MealWithExceed(meal.getDateTime(), meal.getDescription(), meal.getCalories(),
+                        caloriesSumPerDay.get(meal.getDateTime().toLocalDate()) > caloriesPerDay))
+                .collect(Collectors.toList());
+        return mealWithExceedList;
     }
 }
