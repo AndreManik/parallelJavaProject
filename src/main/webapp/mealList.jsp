@@ -15,7 +15,7 @@
 <section>
     <h2><a href="index.html">Home</a></h2>
     <h3>Meal List</h3>
-    <hr>
+
     <table bgcolor="1" cellpadding="8" cellspacing="0">
         <thead>
         <tr>
