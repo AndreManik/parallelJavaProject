@@ -19,7 +19,7 @@
     <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
             <charser>UTF-8</charser>
-            <pattern>%-5lever %logger{0} [%file:%line] %msg%n</pattern>
+            <pattern>%-5level %logger{0} [%file:%line] %msg%n</pattern>
         </encoder>
     </appender>
 
