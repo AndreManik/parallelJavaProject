@@ -14,21 +14,26 @@ import java.util.stream.Collectors;
 
 public class MealUtils {
 
-    public static void main(String[] args) {
-        List<Meal> mealList = Arrays.asList(
-                new Meal(LocalDateTime.of(2015, Month.MAY, 30,10,20), "Завтрак", 1000),
-                new Meal(LocalDateTime.of(2015, Month.MAY, 30,13,20), "Обед", 500),
-                new Meal(LocalDateTime.of(2015, Month.MAY, 30,20,20), "Ужин", 500),
-                new Meal(LocalDateTime.of(2015, Month.MAY, 31,10,20), "Завтрак", 2000),
-                new Meal(LocalDateTime.of(2015, Month.MAY, 31,13,20), "Обед", 500),
-                new Meal(LocalDateTime.of(2015, Month.MAY, 31,20,20), "Ужин", 510)
-        );
+    public static List<Meal> MEAL_LIST = Arrays.asList(
+            new Meal(LocalDateTime.of(2015, Month.MAY, 30,10,20), "Завтрак", 1000),
+            new Meal(LocalDateTime.of(2015, Month.MAY, 30,13,20), "Обед", 500),
+            new Meal(LocalDateTime.of(2015, Month.MAY, 30,20,20), "Ужин", 500),
+            new Meal(LocalDateTime.of(2015, Month.MAY, 31,10,20), "Завтрак", 2000),
+            new Meal(LocalDateTime.of(2015, Month.MAY, 31,13,20), "Обед", 500),
+            new Meal(LocalDateTime.of(2015, Month.MAY, 31,20,20), "Ужин", 510)
+    );
 
-        List<MealWithExceed> filteredMealWithExceeded = getFilteredMealWithExceeded(mealList, LocalTime.of(7, 0), LocalTime.of(12, 0), 2000);
+    public static void main(String[] args) {
+
+        List<MealWithExceed> filteredMealWithExceeded = getFilteredWithExceeded(MEAL_LIST, LocalTime.of(7, 0), LocalTime.of(12, 0), 2000);
         filteredMealWithExceeded.forEach(meal -> System.out.println(meal));
     }
 
-    private static List<MealWithExceed> getFilteredMealWithExceeded(List<Meal> mealList, LocalTime startTime, LocalTime endTime, int caloriesPerDay) {
+    public static List<MealWithExceed> getWithExceeder(List<Meal> mealList, int caloriesPerDay) {
+        return getFilteredWithExceeded(mealList, LocalTime.MIN, LocalTime.MAX, caloriesPerDay);
+    }
+
+    private static List<MealWithExceed> getFilteredWithExceeded(List<Meal> mealList, LocalTime startTime, LocalTime endTime, int caloriesPerDay) {
 
         Map<LocalDate, Integer> caloriesSumPerDay = mealList.stream().collect(Collectors.groupingBy(meal -> meal.getDate(),
                                                                      Collectors.summingInt(meal -> meal.getCalories())));
