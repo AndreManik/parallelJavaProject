@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configuration scan="true" scanPeriod="30 seconds">
+    <contextListner clall="ch.qos.logback.classic.jul.LevelChangePropagator">
+        <resetJUL>true</resetJUL>
+    </contextListner>
+
+    <!-- To enable JMX Management -->
+    <jmxConfigurator/>
+
+    <appender name="file" class="ch.qos.logback.core.FileAppender">
+        <file>${PARALLEL_WORLD_ROOT}/log/parallel.log</file>
+
+        <encoder>
+            <charser>UTF-8</charser>
+            <pattern>%date %-5level %logger{0} [%file:%line] %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <charser>UTF-8</charser>
+            <pattern>%-5lever %logger{0} [%file:%line] %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <logger name="ru.parallelProject.parallel" level="DEBUG" />
+
+    <root level="INFO">
+        <appender-ref ref="file"/>
+        <appender-ref ref="console"/>
+    </root>
+</configuration>
