@@ -36,10 +36,10 @@
         }
         a {
             text-decoration: none;
-            color: brown;
+            color: cornflowerblue;
         }
         a.visited {
-            color: brown;
+            color: cornflowerblue;
         }
 
     </style>
@@ -48,6 +48,8 @@
 <body>
     <h1><a href="index.html">go home to parallel world portal</a></h1>
     <h2><a href="users">go to the users Servlet</a></h2>
+    <h3>Meal list</h3>
+    <a href="meals?action=create">Add meal</a>
     <table cellspacing="0" cellpadding="8" class="bContentTables">
         <caption>Meal table</caption>
         <tr>
@@ -55,6 +57,8 @@
             <th>Description</th>
             <th>Calories</th>
             <th>Exceeded</th>
+            <th></th>
+            <th></th>
         </tr>
 
         <c:forEach items="${mealList}" var="meal">
@@ -70,8 +74,10 @@
                     ${meal.getCalories()}
                 </td>
                 <td>
-                    ${meal.isExceed()}
+                    ${meal.exceed}
                 </td>
+                <td><a href="meals?action=update&id=${meal.getId()}">Update</a></td>
+                <td><a href="meals?action=delete&id=${meal.getId()}">Delete</a></td>
             </tr>
         </c:forEach>
     </table>

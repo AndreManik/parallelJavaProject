@@ -8,13 +8,14 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.Month;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
 public class MealUtils {
 
-    public static final List<Meal> mealList = Arrays.asList(
+   /* public static final List<Meal> mealList = Arrays.asList(
             new Meal(LocalDateTime.of(2015, Month.MAY, 30,10,20), "Завтрак", 1000),
             new Meal(LocalDateTime.of(2015, Month.MAY, 30,13,20), "Обед", 500),
             new Meal(LocalDateTime.of(2015, Month.MAY, 30,20,20), "Ужин", 500),
@@ -28,13 +29,13 @@ public class MealUtils {
 
         List<MealWithExceed> filteredMealWithExceeded = getFilteredMealWithExceeded(mealList, LocalTime.of(7, 0), LocalTime.of(12, 0), 2000);
         filteredMealWithExceeded.forEach(meal -> System.out.println(meal));
-    }
+    }*/
 
-    public static List<MealWithExceed> getMealWithExceeded(List<Meal> mealList, int calories) {
+    public static List<MealWithExceed> getMealWithExceeded(Collection<Meal> mealList, int calories) {
         return getFilteredMealWithExceeded(mealList, LocalTime.MIN, LocalTime.MAX, calories);
     }
 
-    private static List<MealWithExceed> getFilteredMealWithExceeded(List<Meal> mealList, LocalTime startTime, LocalTime endTime, int caloriesPerDay) {
+    private static List<MealWithExceed> getFilteredMealWithExceeded(Collection<Meal> mealList, LocalTime startTime, LocalTime endTime, int caloriesPerDay) {
 
         Map<LocalDate, Integer> caloriesSumPerDay = mealList.stream().collect(Collectors.groupingBy(meal -> meal.getDate(),
                                                                      Collectors.summingInt(meal -> meal.getCalories())));
@@ -46,6 +47,6 @@ public class MealUtils {
     }
 
     private static MealWithExceed createWithExceed(Meal meal, boolean exceeded) {
-        return new MealWithExceed(meal.getDateTime(), meal.getDescription(), meal.getCalories(), exceeded);
+        return new MealWithExceed(meal.getId(), meal.getDateTime(), meal.getDescription(), meal.getCalories(), exceeded);
     }
 }
