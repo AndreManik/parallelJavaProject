@@ -1,23 +1,32 @@
 package ru.parallelProject.parallel.model;
 
+import ru.parallelProject.parallel.util.MealUtils;
+
 import java.util.Collection;
 import java.util.Date;
 import java.util.EnumSet;
 import java.util.Set;
 
-public class User extends NamedEntity {
+public class User extends AbstractNameEntity{
     private String email;
     private String password;
     private boolean enabled = true;
     private Date registred = new Date();
-    private Set<Role> authorities;
+    private Set<Role> roles;
 
-    public User(String name, String email, String password, Role role, Role... roles) {
-        super(name);
+    private int caloriesPerDay = MealUtils.DEFAULT_CALORIES_PER_DAY;
+
+    public User(Integer id, String name, String email, String password, Role role, Role... roles) {
+        this(id, name, email, password, MealUtils.DEFAULT_CALORIES_PER_DAY, true, EnumSet.of(role, roles));
+    }
+
+    public User(Integer id, String name, String email, String password, int caloriesPerDay, boolean enabled, Set<Role> roles) {
+        super(id, name);
         this.email = email;
         this.password = password;
-        this.enabled = true;
-        this.authorities = EnumSet.of(role, roles);
+        this.caloriesPerDay = caloriesPerDay;
+        this.enabled = enabled;
+        this.roles = roles;
     }
 
     public String getEmail() {
@@ -44,12 +53,12 @@ public class User extends NamedEntity {
         this.enabled = enabled;
     }
 
-    public Collection<Role> getAuthorities() {
-        return authorities;
+    public Collection<Role> getRoles() {
+        return roles;
     }
 
-    public void setAuthorities(Role role) {
-        this.authorities.add(role);
+    public void setRoles(Role role) {
+        this.roles.add(role);
     }
 
     public Date getRegistred() {
@@ -63,12 +72,13 @@ public class User extends NamedEntity {
     @Override
     public String toString() {
         return "User{" +
-                    "name='" + name + '\'' +
-                    "email='" + email + '\'' +
-                    ", password='" + password + '\'' +
-                    ", enabled=" + enabled +
-                    ", registred=" + registred +
-                    ", authorities=" + authorities +
+                "name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", enabled=" + enabled +
+                ", registred=" + registred +
+                ", roles=" + roles +
+                ", caloriesPerDay=" + caloriesPerDay +
                 '}';
     }
 }

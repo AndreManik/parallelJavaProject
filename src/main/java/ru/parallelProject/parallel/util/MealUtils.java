@@ -30,6 +30,7 @@ public class MealUtils {
         List<MealWithExceed> filteredMealWithExceeded = getFilteredMealWithExceeded(mealList, LocalTime.of(7, 0), LocalTime.of(12, 0), 2000);
         filteredMealWithExceeded.forEach(meal -> System.out.println(meal));
     }*/
+   public static final int DEFAULT_CALORIES_PER_DAY = 2000;
 
     public static List<MealWithExceed> getMealWithExceeded(Collection<Meal> mealList, int calories) {
         return getFilteredMealWithExceeded(mealList, LocalTime.MIN, LocalTime.MAX, calories);
