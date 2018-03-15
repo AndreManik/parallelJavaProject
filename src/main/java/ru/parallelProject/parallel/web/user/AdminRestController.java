@@ -1,5 +1,6 @@
 package ru.parallelProject.parallel.web.user;
 
+import org.springframework.stereotype.Controller;
 import ru.parallelProject.parallel.model.User;
 
 import java.util.List;
