@@ -3,6 +3,7 @@ package ru.parallelProject.parallel.service;
 import ru.parallelProject.parallel.model.User;
 import ru.parallelProject.parallel.util.exception.NotFoundException;
 
+import java.util.Collection;
 import java.util.List;
 
 public interface UserService {
@@ -13,6 +14,6 @@ public interface UserService {
     void delete(int id) throws NotFoundException;
     User get(int id) throws NotFoundException;
     User getByEmail(String email) throws NotFoundException;
-    List<User> getAll();
+    Collection<User> getAll();
     void update(User user) throws NotFoundException;
 }

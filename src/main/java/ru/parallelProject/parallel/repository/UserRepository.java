@@ -2,6 +2,7 @@ package ru.parallelProject.parallel.repository;
 
 import ru.parallelProject.parallel.model.User;
 
+import java.util.Collection;
 import java.util.List;
 
 public interface UserRepository {
@@ -10,5 +11,5 @@ public interface UserRepository {
     boolean delete(int id);
     User get(int id);
     User getByEmail(String email);
-    List<User> getAll();
+    Collection<User> getAll();
 }

@@ -2,7 +2,8 @@ package ru.parallelProject.parallel;
 
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import ru.parallelProject.parallel.repository.mock.MockUserRepository;
+import ru.parallelProject.parallel.repository.UserRepository;
+import ru.parallelProject.parallel.repository.InMemoryUserRepository;
 
 import java.util.Arrays;
 
@@ -12,9 +13,13 @@ public class SpringMain {
         ConfigurableApplicationContext appContext = new ClassPathXmlApplicationContext("spring/spring-app.xml");
         System.out.println(Arrays.toString(appContext.getBeanDefinitionNames()));
 
-        MockUserRepository mockUserRepository = (MockUserRepository) appContext.getBean("mockUserRepository");
-        mockUserRepository = appContext.getBean(MockUserRepository.class);
-        System.out.println(mockUserRepository.getAll());
+        InMemoryUserRepository mockUserRepository = (InMemoryUserRepository) appContext.getBean("inMemoryUserRepository");
+        mockUserRepository = appContext.getBean(InMemoryUserRepository.class);
+
+        UserRepository userRepository = appContext.getBean(UserRepository.class);
+        userRepository.getAll();
+
+
         appContext.close();
     }
 }

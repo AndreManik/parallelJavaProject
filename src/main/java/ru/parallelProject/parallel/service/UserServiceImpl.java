@@ -6,6 +6,7 @@ import ru.parallelProject.parallel.model.User;
 import ru.parallelProject.parallel.repository.UserRepository;
 import ru.parallelProject.parallel.util.exception.NotFoundException;
 
+import java.util.Collection;
 import java.util.List;
 
 import static ru.parallelProject.parallel.util.ValidationUtil.checkNotFound;
@@ -46,7 +47,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> getAll() {
+    public Collection<User> getAll() {
         return repository.getAll();
     }
 
