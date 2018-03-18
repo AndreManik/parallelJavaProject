@@ -4,52 +4,39 @@
 <html>
 <head>
     <title>Meal list</title>
-
-    <style>
-        .normal {
-            color:lightgreen;
-            background: green;
-            font-family: 'PT Sans', sans-serif;
-        }
-        .exceeded {
-            color: antiquewhite;
-            background: brown;
-            font-family: 'PT Sans', sans-serif;
-        }
-        .headers {
-              color: lightgray;
-              background: dimgrey;
-            font-family: 'PT Sans', sans-serif;
-
-        }
-        .bContentTables{
-            border:1px solid #CCCCCC;
-            border-radius: 10px; /* CSS3 */
-            overflow:hidden;
-            font-family: 'PT Sans', sans-serif;
-        }
-        h1 {
-            font-family: 'PT Sans', sans-serif;
-        }
-        h2 {
-            font-family: 'PT Sans', sans-serif;
-        }
-        a {
-            text-decoration: none;
-            color: cornflowerblue;
-        }
-        a.visited {
-            color: cornflowerblue;
-        }
-
-    </style>
-
+    <link rel="stylesheet" href="css/style.css"/>
 </head>
+
 <body>
     <h1><a href="index.html">go home to parallel world portal</a></h1>
     <h2><a href="users">go to the users Servlet</a></h2>
     <h3>Meal list</h3>
+
+    <form method="post" action="meals?action=filter">
+        <dl>
+            <dt>From Data:</dt>
+            <dd><input type="date" name="startDate" value="${param.startDate}"></dd>
+        </dl>
+        <dl>
+            <dt>To Date:</dt>
+            <dd><input type="date" name="endDate" value="${param.endDate}"></dd>
+        </dl>
+        <dl>
+            <dt>From Time:</dt>
+            <dd><input type="time" name="startTime" value="${param.startTime}"></dd>
+        </dl>
+        <dl>
+            <dt>To Time:</dt>
+            <dd><input type="time" name="endTime" value="${param.endTime}"></dd>
+        </dl>
+        <button type="submit">Select</button>
+    </form>
+
+    <hr/>
+
     <a href="meals?action=create">Add meal</a>
+    <hr/>
+
     <table cellspacing="0" cellpadding="8" class="bContentTables">
         <caption>Meal table</caption>
         <tr>
@@ -61,11 +48,12 @@
             <th></th>
         </tr>
 
-        <c:forEach items="${mealList}" var="meal">
-            <jsp:useBean id="meal" type="ru.parallelProject.parallel.model.MealWithExceed"/>
-            <tr class="${meal.isExceed() ? "exceeded" : "normal"}">
+        <c:forEach items="${meals}" var="meal">
+            <jsp:useBean id="meal" type="ru.parallelProject.parallel.to.MealWithExceed"/>
+            <tr data-mealExceed="${meal.exceed}">
                 <td>
-                    ${meal.getDate()}
+                    ${meal.dateTime.toLocalDate()}
+                            ${meal.dateTime.toLocalTime()}
                 </td>
                 <td>
                      ${meal.getDescription()}

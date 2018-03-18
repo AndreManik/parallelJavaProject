@@ -1,14 +1,24 @@
 package ru.parallelProject.parallel.repository;
 
 import ru.parallelProject.parallel.model.Meal;
-import ru.parallelProject.parallel.model.MealWithExceed;
 
+import java.time.LocalDateTime;
 import java.util.Collection;
+import java.util.List;
 
 public interface MealRepository {
+    // null if updated meal do not belong to userId
+    Meal save(Meal meal, int userId);
 
-    Meal save(Meal meal);
-    void delete(int id);
-    Meal get(int id);
-    Collection<Meal> getAll();
+    // false if meal do not belong to userId
+    boolean delete(int id, int userId);
+
+    // null if meal do not belong to userId
+    Meal get(int id, int userId);
+
+    // ORDERED dateTime desc
+    List<Meal> getAll(int userId);
+
+    // ORDERED dateTime desc
+    List<Meal> getBetween(LocalDateTime startDate, LocalDateTime endDate, int userId);
 }
