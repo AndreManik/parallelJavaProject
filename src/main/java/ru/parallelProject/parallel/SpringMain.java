@@ -1,5 +1,6 @@
 package ru.parallelProject.parallel;
 
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import ru.parallelProject.parallel.model.Role;
@@ -15,7 +16,10 @@ public class SpringMain {
         System.out.println("Bean definition names: " + Arrays.toString(appCtx.getBeanDefinitionNames()));
 
 //        UserRepository userRepository = (UserRepository) appCtx.getBean("mockUserRepository");
-        UserRepository userRepository = appCtx.getBean(UserRepository.class);
+        @Qualifier("")
+        UserRepository userRepository;
+
+        userRepository = appCtx.getBean(UserRepository.class);
         userRepository.getAll();
 
         UserService userService = appCtx.getBean(UserService.class);

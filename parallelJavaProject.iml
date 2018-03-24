@@ -56,5 +56,6 @@
     <orderEntry type="library" name="Maven: postgresql:postgresql:9.1-901-1.jdbc4" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-jdbc:5.0.4.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-tx:5.0.4.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: org.assertj:assertj-core:3.9.1" level="project" />
   </component>
 </module>

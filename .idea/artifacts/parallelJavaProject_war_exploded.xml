@@ -22,6 +22,7 @@
           <element id="library" level="project" name="Maven: postgresql:postgresql:9.1-901-1.jdbc4" />
           <element id="library" level="project" name="Maven: org.springframework:spring-jdbc:5.0.4.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework:spring-tx:5.0.4.RELEASE" />
+          <element id="library" level="project" name="Maven: org.assertj:assertj-core:3.9.1" />
         </element>
       </element>
       <element id="directory" name="META-INF">
