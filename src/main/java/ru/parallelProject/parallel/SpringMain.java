@@ -16,7 +16,7 @@ public class SpringMain {
         System.out.println("Bean definition names: " + Arrays.toString(appCtx.getBeanDefinitionNames()));
 
 //        UserRepository userRepository = (UserRepository) appCtx.getBean("mockUserRepository");
-        @Qualifier("")
+
         UserRepository userRepository;
 
         userRepository = appCtx.getBean(UserRepository.class);
